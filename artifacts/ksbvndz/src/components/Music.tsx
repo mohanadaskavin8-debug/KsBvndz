@@ -1,63 +1,59 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Play } from 'lucide-react';
 
-import daysGoneImg from '@assets/generated_images/days_gone.jpg';
-import villiansImg from '@assets/generated_images/villians.jpg';
-import blackSheepImg from '@assets/generated_images/black_sheep.jpg';
-import albumAestheticImg from '@assets/generated_images/album_aesthetic.jpg';
+import oceanPt2Img from '@assets/covers/ocean-pt2.jpg';
+import ghostImg from '@assets/covers/ghost.jpg';
+import lifeOfDaPartyImg from '@assets/covers/life-of-da-party.jpg';
+import voicesInMyHeadImg from '@assets/covers/voices-in-my-head.jpg';
+import blackSheepImg from '@assets/covers/black-sheep.jpg';
+import fullaPillsImg from '@assets/covers/fulla-pills.jpg';
+import closeToYouImg from '@assets/covers/close-to-you.jpg';
+import warImg from '@assets/covers/war.jpg';
+import freestyleOpenMicImg from '@assets/covers/freestyle-open-mic.jpg';
+import pushImg from '@assets/covers/push.jpg';
+import insomniaImg from '@assets/covers/insomnia.jpg';
+import greatnessOpenMicImg from '@assets/covers/greatness-open-mic.jpg';
+import noRestImg from '@assets/covers/no-rest.jpg';
+import villainsImg from '@assets/covers/villains.jpg';
+import darksideImg from '@assets/covers/darkside.jpg';
+import daysGoneImg from '@assets/covers/days-gone.jpg';
 
 const tracks = [
-  {
-    title: 'Villians',
-    type: 'Single ft. Savv4x, 100 OTD',
-    streams: '1.8M+',
-    image: villiansImg,
-    featured: true,
-    link: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe'
-  },
-  {
-    title: 'Days Gone',
-    type: 'Debut Album',
-    streams: '91.7K',
-    image: daysGoneImg,
-    featured: false,
-    link: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe'
-  },
-  {
-    title: 'Black Sheep',
-    type: 'Single',
-    streams: '728+',
-    image: blackSheepImg,
-    featured: false,
-    link: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe'
-  },
-  {
-    title: 'Insomnia',
-    type: 'Single',
-    streams: '166K',
-    image: albumAestheticImg,
-    featured: false,
-    link: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe'
-  }
+  { title: 'Ocean, Pt. 2', date: '2026-03-30', image: oceanPt2Img, featured: true },
+  { title: 'Ghost', date: '2026-03-08', image: ghostImg, featured: false },
+  { title: 'Life Of Da Party', date: '2025-12-19', image: lifeOfDaPartyImg, featured: false },
+  { title: 'Voices in My Head', date: '2025-10-22', image: voicesInMyHeadImg, featured: false },
+  { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: false },
+  { title: 'Fulla Pills', date: '2025-09-05', image: fullaPillsImg, featured: false },
+  { title: 'Close to You', date: '2025-06-26', image: closeToYouImg, featured: false },
+  { title: 'War', date: '2025-05-16', image: warImg, featured: false },
+  { title: 'Freestyle (Open Mic)', date: '2025-04-02', image: freestyleOpenMicImg, featured: false },
+  { title: 'PUSH', date: '2025-03-06', image: pushImg, featured: false },
+  { title: 'Insomnia', date: '2025-02-22', image: insomniaImg, featured: false },
+  { title: 'Greatness (Open Mic)', date: '2024-12-27', image: greatnessOpenMicImg, featured: false },
+  { title: 'No Rest', date: '2024-10-29', image: noRestImg, featured: false },
+  { title: 'Villains (feat. KsBvndz)', date: '2024-10-19', image: villainsImg, featured: true },
+  { title: 'Darkside', date: '2024-06-15', image: darksideImg, featured: false },
+  { title: 'Days Gone', date: '2024-05-03', image: daysGoneImg, featured: true }
 ];
 
 export function Music() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
@@ -78,12 +74,12 @@ export function Music() {
             rel="noopener noreferrer"
             className="text-sm uppercase tracking-widest text-gray-400 hover:text-white transition-colors border-b border-primary/50 hover:border-primary pb-1 inline-block"
           >
-            View All Releases
+            Listen on Spotify
           </a>
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -91,11 +87,11 @@ export function Music() {
           {tracks.map((track, idx) => (
             <motion.a
               key={idx}
-              href={track.link}
+              href="https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe"
               target="_blank"
               rel="noopener noreferrer"
               variants={itemVariants}
-              className={`group relative block ${track.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
+              className={`group relative block ${track.featured ? 'col-span-2 row-span-2' : ''}`}
               style={{ perspective: '1000px' }}
             >
               <div className="relative w-full aspect-square overflow-hidden bg-black/50 transition-all duration-500 transform-gpu group-hover:rotate-x-2 group-hover:-rotate-y-2 group-hover:scale-[1.02] border border-white/5 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(139,0,0,0.3)]">
@@ -117,21 +113,13 @@ export function Music() {
                 </div>
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  {track.featured && (
-                    <span className="inline-block px-2 py-1 bg-primary text-white text-xs uppercase tracking-widest mb-3">
-                      Most Streamed
-                    </span>
-                  )}
-                  <h4 className={`font-display uppercase text-white ${track.featured ? 'text-4xl md:text-5xl' : 'text-3xl'} mb-1`}>
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                  <h4 className={`font-display uppercase text-white ${track.featured ? 'text-3xl md:text-5xl' : 'text-xl md:text-2xl'} mb-1`}>
                     {track.title}
                   </h4>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-widest text-gray-400">
-                      {track.type}
-                    </span>
-                    <span className="text-xs uppercase tracking-widest text-primary font-bold">
-                      {track.streams}
+                    <span className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">
+                      {track.date}
                     </span>
                   </div>
                 </div>

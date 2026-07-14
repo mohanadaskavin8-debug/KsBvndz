@@ -1,26 +1,24 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-import studioImg from '@assets/generated_images/studio.jpg';
-import streetwearImg from '@assets/generated_images/streetwear.jpg';
-import lowAngleImg from '@assets/generated_images/low_angle.jpg';
-import albumAestheticImg from '@assets/generated_images/album_aesthetic.jpg';
-import heroImg from '@assets/generated_images/hero.jpg';
+import galleryImg1 from '@assets/Image_1_1784064592828.jpeg';
+import galleryImg2 from '@assets/IMG_2619_1784064629615.jpg';
+import galleryImg3 from '@assets/IMG_2620_1784064629615.jpg';
+import galleryImg4 from '@assets/IMG_2622_1784064629615.jpg';
 
 const images = [
-  { src: lowAngleImg, alt: "KsBvndz Portrait", className: "md:col-span-2 md:row-span-2" },
-  { src: studioImg, alt: "KsBvndz Studio", className: "md:col-span-1 md:row-span-1" },
-  { src: streetwearImg, alt: "KsBvndz Street", className: "md:col-span-1 md:row-span-2" },
-  { src: albumAestheticImg, alt: "KsBvndz Aesthetic", className: "md:col-span-1 md:row-span-1" },
-  { src: heroImg, alt: "KsBvndz Live", className: "md:col-span-2 md:row-span-1" }
+  { src: galleryImg1, alt: "KsBvndz", className: "md:col-span-2 md:row-span-2" },
+  { src: galleryImg2, alt: "KsBvndz", className: "md:col-span-1 md:row-span-1" },
+  { src: galleryImg3, alt: "KsBvndz", className: "md:col-span-1 md:row-span-2" },
+  { src: galleryImg4, alt: "KsBvndz", className: "md:col-span-1 md:row-span-1" }
 ];
 
 export function Gallery() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -28,7 +26,7 @@ export function Gallery() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };

@@ -1,63 +1,76 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
-
-import heroImg from '@assets/generated_images/hero.jpg';
 
 export function Hero() {
   const { scrollY } = useScroll();
-  
-  const yImage = useTransform(scrollY, [0, 1000], [0, 300]);
+  const reduce = useReducedMotion();
+
   const opacityText = useTransform(scrollY, [0, 500], [1, 0]);
   const scaleText = useTransform(scrollY, [0, 500], [1, 1.2]);
   const letterSpacing = useTransform(scrollY, [0, 500], ['0.1em', '0.5em']);
 
   const socials = [
-    { icon: SiSpotify, href: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe' },
-    { icon: SiApplemusic, href: 'https://music.apple.com/ca/artist/ksbvndz/1745377739' },
-    { icon: SiInstagram, href: 'https://www.instagram.com/ksbvndz/' },
+    { icon: SiSpotify, href: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe', label: 'Spotify' },
+    { icon: SiApplemusic, href: 'https://music.apple.com/ca/artist/ksbvndz/1745377739', label: 'Apple Music' },
+    { icon: SiYoutube, href: 'https://youtube.com/channel/UCq2MDRG4fWR7olS5nD1Ja6A', label: 'YouTube' },
+    { icon: SiInstagram, href: 'https://instagram.com/ksbvndz/', label: 'Instagram' },
+    { icon: SiTiktok, href: 'https://tiktok.com/@ksbvndz', label: 'TikTok' },
+    { icon: SiX, href: 'https://x.com/28ville44', label: 'X' },
   ];
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
-      {/* Background Image with Parallax */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        style={{ y: yImage }}
+    <section id="video" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
+      {/* Background Video */}
+      <motion.div
+        className="absolute inset-0 z-0 pointer-events-none"
+        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
+        animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+        transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-        <div className="absolute inset-0 bg-black/30 z-10" />
-        <img 
-          src={heroImg} 
-          alt="KsBvndz" 
-          className="w-full h-full object-cover object-top opacity-70"
-        />
+        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/80 z-10 pointer-events-none" />
+        <iframe
+          className="w-[300vw] h-[300vh] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[150vw] md:h-[150vh] pointer-events-none"
+          src="https://www.youtube.com/embed/uvw-8HFJCag?autoplay=1&mute=1&loop=1&playlist=uvw-8HFJCag&controls=0&showinfo=0&rel=0&playsinline=1"
+          title="KsBvndz - Black Sheep (Official Music Video)"
+          tabIndex={-1}
+          aria-hidden="true"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        ></iframe>
       </motion.div>
 
       {/* Particles/Dust effect overlay */}
       <div className="absolute inset-0 z-10 opacity-30 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 flex flex-col items-center justify-center text-center pt-20">
+      <div className="relative z-20 container mx-auto px-6 flex flex-col items-center justify-center text-center pt-20 pointer-events-none">
         <motion.div
-          style={{ opacity: opacityText, scale: scaleText }}
+          style={reduce ? undefined : { opacity: opacityText, scale: scaleText }}
           className="flex flex-col items-center"
         >
-          <motion.h1 
-            style={{ letterSpacing }}
-            className="text-7xl md:text-9xl lg:text-[12rem] font-display uppercase text-white font-bold mb-4 drop-shadow-2xl"
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30, filter: 'blur(12px)' }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ delay: reduce ? 0 : 2.2, duration: reduce ? 0.4 : 1.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            KsBvndz
-          </motion.h1>
-          
-          <motion.div 
+            <motion.h1
+              style={reduce ? undefined : { letterSpacing }}
+              className="text-6xl sm:text-7xl md:text-9xl lg:text-[12rem] font-display uppercase text-white font-bold mb-4 drop-shadow-2xl"
+            >
+              KsBvndz
+            </motion.h1>
+          </motion.div>
+
+          <motion.div
             className="flex items-center gap-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1 }}
+            transition={{ delay: reduce ? 0.1 : 2.7, duration: reduce ? 0.4 : 0.9 }}
           >
-            <span>Toronto</span>
+            <span>Black Sheep</span>
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Streameum Entertainment</span>
+            <span>Out Now</span>
           </motion.div>
         </motion.div>
       </div>
@@ -70,11 +83,12 @@ export function Hero() {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={social.label}
             className="text-gray-400 hover:text-white hover:scale-110 transition-all duration-300"
-            whileHover={{ x: -5 }}
-            initial={{ opacity: 0, x: 20 }}
+            whileHover={reduce ? undefined : { x: -5 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.5 + idx * 0.2 }}
+            transition={{ delay: reduce ? 0.1 : 2.9 + idx * 0.12, duration: 0.6 }}
           >
             <social.icon size={24} />
           </motion.a>
@@ -82,17 +96,17 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
+        transition={{ delay: reduce ? 0.2 : 3.2, duration: 1 }}
       >
         <span className="text-xs uppercase tracking-widest text-gray-500">Scroll</span>
-        <motion.div 
+        <motion.div
           className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"
-          animate={{ height: ['0%', '100%'], opacity: [0, 1, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          animate={reduce ? { height: '100%', opacity: 0.6 } : { height: ['0%', '100%'], opacity: [0, 1, 0] }}
+          transition={reduce ? { duration: 0 } : { duration: 1.5, repeat: Infinity, ease: 'linear' }}
         />
       </motion.div>
     </section>

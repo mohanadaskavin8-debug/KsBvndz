@@ -1,0 +1,1 @@
+- [Lenis smooth scroll](lenis-smooth-scroll.md) — native `lenis` only (deprecated `@studio-freight/react-lenis` = duplicate-React crash); Lenis also overrides native hash-anchor links, so intercept anchor clicks and call `lenis.scrollTo()`.

@@ -1,73 +1,85 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+
+const links = [
+  { href: '#video', label: 'Video' },
+  { href: '#about', label: 'Bio' },
+  { href: '#music', label: 'Music' },
+  { href: '#gallery', label: 'Visuals' },
+];
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
-  
-  const navBackground = useTransform(
-    scrollY,
-    [0, 100],
-    ['rgba(10, 10, 10, 0)', 'rgba(10, 10, 10, 0.8)']
-  );
-
-  const navBlur = useTransform(
-    scrollY,
-    [0, 100],
-    ['blur(0px)', 'blur(12px)']
-  );
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const links = [
-    { name: 'About', href: '#about' },
-    { name: 'Music', href: '#music' },
-    { name: 'Journey', href: '#timeline' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Connect', href: '#connect' },
-  ];
-
   return (
-    <motion.nav 
-      className="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
-      style={{
-        backgroundColor: navBackground,
-        backdropFilter: navBlur,
-      }}
+    <motion.nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || open ? 'bg-background/90 backdrop-blur-md border-b border-border/50 py-4' : 'bg-transparent py-6 md:py-8'}`}
     >
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="#" className="text-3xl font-display tracking-widest text-white hover:text-primary transition-colors">
+      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a
+          href="#"
+          onClick={() => setOpen(false)}
+          className="font-display text-2xl md:text-3xl tracking-[0.2em] text-primary font-bold text-glow"
+        >
           KSBVNDZ
         </a>
-        
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className="text-sm uppercase tracking-widest text-muted-foreground hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+
+        {/* Desktop links */}
+        <div className="hidden md:flex gap-8 text-sm font-medium tracking-[0.2em] uppercase">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-primary transition-colors">
+              {l.label}
             </a>
           ))}
         </div>
-        
-        <a 
-          href="https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex border border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 uppercase tracking-widest text-sm transition-all duration-300 shadow-[0_0_15px_rgba(139,0,0,0.3)] hover:shadow-[0_0_25px_rgba(139,0,0,0.6)]"
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="md:hidden text-white p-2 -mr-2 relative z-50"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
         >
-          Stream Now
-        </a>
+          {open ? <X size={26} /> : <Menu size={26} />}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
+            className="md:hidden overflow-hidden bg-background/95 backdrop-blur-md border-b border-border/50"
+          >
+            <div className="flex flex-col px-6 py-8 gap-6">
+              {links.map((l, i) => (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + i * 0.07 }}
+                  className="text-3xl font-display uppercase tracking-[0.15em] text-white hover:text-primary transition-colors"
+                >
+                  {l.label}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

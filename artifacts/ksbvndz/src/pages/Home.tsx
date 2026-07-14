@@ -11,7 +11,10 @@ import { Gallery } from '@/components/Gallery';
 import { Connect, Footer } from '@/components/Connect';
 
 export default function Home() {
-  const [loadingComplete, setLoadingComplete] = useState(false);
+  // Skip the cinematic intro (and its scroll lock) for reduced-motion users.
+  const [loadingComplete, setLoadingComplete] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
 
   return (
     <div className={`min-h-screen bg-black text-white ${!loadingComplete ? 'overflow-hidden h-screen' : ''}`}>

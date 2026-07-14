@@ -6,43 +6,43 @@ const milestones = [
     date: 'May 2024',
     title: 'Days Gone',
     subtitle: 'Debut Album',
-    description: 'Tracks: Intro, VilleSide, Franchise, No Return, Last Mention, Inner Demons, Confessions',
-    stats: '91.7K plays on Audiomack'
+    description: 'The 8-track debut that introduced his sound — raw drill energy meets confessional storytelling.',
+    stats: '8 Tracks'
   },
   {
     date: 'October 2024',
-    title: 'Villians',
+    title: 'Villains',
     subtitle: 'ft. Savv4x, 100 OTD',
-    description: 'Breakthrough collab record that put the city on notice.',
-    stats: '1.8M total streams'
+    description: 'The breakout collaboration that put the city on notice.',
+    stats: 'Breakout Single'
   },
   {
-    date: 'Nov–Dec 2024',
+    date: 'February 2025',
     title: 'Insomnia',
     subtitle: 'Single',
-    description: 'Dark introspective solo record exploring the late-night mindset.',
-    stats: '166K streams'
-  },
-  {
-    date: 'March 2025',
-    title: 'PUSH',
-    subtitle: 'with 100 OTD',
-    description: 'Street anthem collaboration delivering raw energy.',
-    stats: '545K streams'
+    description: 'A dark, introspective solo record exploring the late-night mindset.',
+    stats: 'Single'
   },
   {
     date: 'April 2025',
     title: 'Freestyle (Open Mic)',
-    subtitle: 'Single',
-    description: 'Raw unfiltered performance record showing pure lyrical ability.',
-    stats: 'Live Recording'
+    subtitle: 'Open Mic',
+    description: 'A raw, unfiltered performance record — pure lyrical ability, no hooks to hide behind.',
+    stats: 'Live'
   },
   {
-    date: 'Oct 2025',
+    date: 'October 2025',
     title: 'Black Sheep',
-    subtitle: 'Single',
-    description: 'Latest release continuing the dark, melodic drill evolution.',
-    stats: '728+ plays'
+    subtitle: 'Official Music Video',
+    description: 'The latest visual — dark, melodic drill and a statement of where he stands now.',
+    stats: 'Official Video'
+  },
+  {
+    date: 'March 2026',
+    title: 'Ghost / Ocean, Pt. 2',
+    subtitle: 'Latest Releases',
+    description: 'The newest chapter, pushing the sound further into melody and atmosphere.',
+    stats: 'Out Now'
   }
 ];
 
@@ -53,7 +53,7 @@ export function Timeline() {
     offset: ["start center", "end center"]
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="timeline" className="py-32 bg-black relative" ref={containerRef}>
@@ -68,11 +68,11 @@ export function Timeline() {
         <div className="relative">
           {/* Center Line Container */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
-          
+
           {/* Animated Center Line */}
-          <motion.div 
+          <motion.div
             className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary to-transparent -translate-x-1/2 origin-top"
-            style={{ scaleY: lineHeight }}
+            style={{ scaleY: lineScale }}
           />
 
           <div className="space-y-24">
@@ -80,12 +80,12 @@ export function Timeline() {
               const isEven = index % 2 === 0;
               return (
                 <div key={index} className="relative flex flex-col md:flex-row items-center">
-                  
+
                   {/* Timeline Dot */}
                   <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-primary -translate-x-1/2 z-10 shadow-[0_0_10px_rgba(139,0,0,0.8)]" />
 
                   {/* Content Container */}
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
@@ -102,7 +102,7 @@ export function Timeline() {
                       </div>
                     </div>
                   </motion.div>
-                  
+
                 </div>
               );
             })}

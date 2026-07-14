@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-import studioImg from '@assets/generated_images/studio.jpg';
-import streetwearImg from '@assets/generated_images/streetwear.jpg';
+import aboutImg1 from '@assets/Image_1_1784064592828.jpeg';
+import aboutImg2 from '@assets/IMG_2622_1784064629615.jpg';
 
 export function About() {
   const containerRef = useRef(null);
@@ -36,8 +36,8 @@ export function About() {
             
             <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
               <div>
-                <div className="text-4xl font-display text-white">1.8M+</div>
-                <div className="text-sm uppercase tracking-wider text-gray-500 mt-1">Streams on Villians</div>
+                <div className="text-4xl font-display text-white">20+</div>
+                <div className="text-sm uppercase tracking-wider text-gray-500 mt-1">Releases</div>
               </div>
               <div>
                 <div className="text-4xl font-display text-white">2024</div>
@@ -54,8 +54,8 @@ export function About() {
               className="relative z-10 aspect-[3/4] max-w-md mx-auto"
             >
               <img 
-                src={studioImg} 
-                alt="KsBvndz in Studio" 
+                src={aboutImg1} 
+                alt="KsBvndz" 
                 className="w-full h-full object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 ring-1 ring-white/10 rounded-sm pointer-events-none" />
@@ -65,11 +65,11 @@ export function About() {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="absolute -bottom-12 -right-6 lg:-right-12 w-1/2 aspect-[4/5] z-20 hidden md:block"
+              className="absolute -bottom-12 -right-6 lg:-right-12 w-1/2 aspect-[4/5] z-20 hidden lg:block"
             >
               <img 
-                src={streetwearImg} 
-                alt="KsBvndz Streetwear" 
+                src={aboutImg2} 
+                alt="KsBvndz" 
                 className="w-full h-full object-cover rounded-sm border-4 border-black"
               />
             </motion.div>
