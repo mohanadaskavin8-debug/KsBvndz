@@ -1,1 +1,2 @@
 - [Lenis smooth scroll](lenis-smooth-scroll.md) — native `lenis` only (deprecated `@studio-freight/react-lenis` = duplicate-React crash); Lenis also overrides native hash-anchor links, so intercept anchor clicks and call `lenis.scrollTo()`.
+- [KsBvndz discography data source](ksbvndz-discography.md) — song list uses REAL Apple Music metadata (iTunes lookup id 1745377739) for titles/dates/covers; never fabricate.

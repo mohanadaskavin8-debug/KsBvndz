@@ -36,13 +36,6 @@ const milestones = [
     subtitle: 'Official Music Video',
     description: 'The latest visual — dark, melodic drill and a statement of where he stands now.',
     stats: 'Official Video'
-  },
-  {
-    date: 'March 2026',
-    title: 'Ghost / Ocean, Pt. 2',
-    subtitle: 'Latest Releases',
-    description: 'The newest chapter, pushing the sound further into melody and atmosphere.',
-    stats: 'Out Now'
   }
 ];
 

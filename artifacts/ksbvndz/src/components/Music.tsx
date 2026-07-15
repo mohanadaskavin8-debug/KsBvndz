@@ -3,9 +3,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Play } from 'lucide-react';
 
-import oceanPt2Img from '@assets/covers/ocean-pt2.jpg';
-import ghostImg from '@assets/covers/ghost.jpg';
-import lifeOfDaPartyImg from '@assets/covers/life-of-da-party.jpg';
+import hatsImg from '@assets/covers/hats.jpg';
+import carDinkImg from '@assets/covers/car-dink-open-mic.jpg';
+import carDinkPt2Img from '@assets/covers/car-dink-pt2.jpg';
 import voicesInMyHeadImg from '@assets/covers/voices-in-my-head.jpg';
 import blackSheepImg from '@assets/covers/black-sheep.jpg';
 import fullaPillsImg from '@assets/covers/fulla-pills.jpg';
@@ -21,10 +21,7 @@ import darksideImg from '@assets/covers/darkside.jpg';
 import daysGoneImg from '@assets/covers/days-gone.jpg';
 
 const tracks = [
-  { title: 'Ocean, Pt. 2', date: '2026-03-30', image: oceanPt2Img, featured: true },
-  { title: 'Ghost', date: '2026-03-08', image: ghostImg, featured: false },
-  { title: 'Life Of Da Party', date: '2025-12-19', image: lifeOfDaPartyImg, featured: false },
-  { title: 'Voices in My Head', date: '2025-10-22', image: voicesInMyHeadImg, featured: false },
+  { title: 'Voices in My Head', date: '2025-10-22', image: voicesInMyHeadImg, featured: true },
   { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: false },
   { title: 'Fulla Pills', date: '2025-09-05', image: fullaPillsImg, featured: false },
   { title: 'Close to You', date: '2025-06-26', image: closeToYouImg, featured: false },
@@ -32,9 +29,12 @@ const tracks = [
   { title: 'Freestyle (Open Mic)', date: '2025-04-02', image: freestyleOpenMicImg, featured: false },
   { title: 'PUSH', date: '2025-03-06', image: pushImg, featured: false },
   { title: 'Insomnia', date: '2025-02-22', image: insomniaImg, featured: false },
+  { title: 'Car Dink, Pt. 2', date: '2025-02-11', image: carDinkPt2Img, featured: false },
   { title: 'Greatness (Open Mic)', date: '2024-12-27', image: greatnessOpenMicImg, featured: false },
   { title: 'No Rest', date: '2024-10-29', image: noRestImg, featured: false },
   { title: 'Villains (feat. KsBvndz)', date: '2024-10-19', image: villainsImg, featured: true },
+  { title: 'Car Dink (Open Mic)', date: '2024-09-22', image: carDinkImg, featured: false },
+  { title: 'Hats', date: '2024-08-23', image: hatsImg, featured: false },
   { title: 'Darkside', date: '2024-06-15', image: darksideImg, featured: false },
   { title: 'Days Gone', date: '2024-05-03', image: daysGoneImg, featured: true }
 ];
