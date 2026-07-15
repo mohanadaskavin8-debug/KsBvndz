@@ -6,7 +6,6 @@ import { Play } from 'lucide-react';
 import hatsImg from '@assets/covers/hats.jpg';
 import carDinkImg from '@assets/covers/car-dink-open-mic.jpg';
 import carDinkPt2Img from '@assets/covers/car-dink-pt2.jpg';
-import voicesInMyHeadImg from '@assets/covers/voices-in-my-head.jpg';
 import blackSheepImg from '@assets/covers/black-sheep.jpg';
 import fullaPillsImg from '@assets/covers/fulla-pills.jpg';
 import closeToYouImg from '@assets/covers/close-to-you.jpg';
@@ -21,8 +20,7 @@ import darksideImg from '@assets/covers/darkside.jpg';
 import daysGoneImg from '@assets/covers/days-gone.jpg';
 
 const tracks = [
-  { title: 'Voices in My Head', date: '2025-10-22', image: voicesInMyHeadImg, featured: true },
-  { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: false },
+  { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: true },
   { title: 'Fulla Pills', date: '2025-09-05', image: fullaPillsImg, featured: false },
   { title: 'Close to You', date: '2025-06-26', image: closeToYouImg, featured: false },
   { title: 'War', date: '2025-05-16', image: warImg, featured: false },
