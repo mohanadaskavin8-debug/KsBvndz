@@ -28,9 +28,24 @@ export function Connect() {
             Stream the Music.<br/>
             <span className="text-primary">Follow the Journey.</span>
           </h2>
-          <p className="text-gray-500 uppercase tracking-[0.2em] text-sm mb-16">
+          <p className="text-gray-500 uppercase tracking-[0.2em] text-sm mb-10">
             Streameum Entertainment // Toronto
           </p>
+
+          <motion.a
+            href="mailto:Ksbvndz@gmail.com"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex flex-col items-center gap-2 mb-16 group"
+          >
+            <span className="text-xs uppercase tracking-[0.3em] text-gray-500 group-hover:text-gray-400 transition-colors">
+              For Booking &amp; Inquiries
+            </span>
+            <span className="text-lg md:text-2xl font-display uppercase tracking-widest text-white border-b border-primary pb-1 group-hover:text-primary transition-colors">
+              Ksbvndz@gmail.com
+            </span>
+          </motion.a>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
