@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
+import heroVideo from '@assets/hero-bg.mp4';
+import heroPoster from '@assets/hero-poster.jpg';
+
 export function Hero() {
   const { scrollY } = useScroll();
   const reduce = useReducedMotion();
@@ -29,15 +32,24 @@ export function Hero() {
       >
         <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/80 z-10 pointer-events-none" />
-        <iframe
-          className="w-[300vw] h-[300vh] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[150vw] md:h-[150vh] pointer-events-none"
-          src="https://www.youtube.com/embed/uvw-8HFJCag?autoplay=1&mute=1&loop=1&playlist=uvw-8HFJCag&controls=0&showinfo=0&rel=0&playsinline=1"
-          title="KsBvndz - Black Sheep (Official Music Video)"
+        <video
+          className="w-full h-full object-cover absolute inset-0 pointer-events-none"
+          src={heroVideo}
+          poster={heroPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
           tabIndex={-1}
           aria-hidden="true"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
+        />
+        <img
+          src={heroPoster}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover absolute inset-0 pointer-events-none -z-10"
+        />
       </motion.div>
 
       {/* Particles/Dust effect overlay */}
