@@ -4,6 +4,7 @@ import { LoadingScreen } from '@/components/LoadingScreen';
 import { CursorGlow } from '@/components/CursorGlow';
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
+import { PreOrder } from '@/components/PreOrder';
 import { About } from '@/components/About';
 import { Music } from '@/components/Music';
 import { Timeline } from '@/components/Timeline';
@@ -36,6 +37,7 @@ export default function Home() {
 
       <main>
         <Hero />
+        <PreOrder />
         <About />
         <Music />
         <Timeline />
