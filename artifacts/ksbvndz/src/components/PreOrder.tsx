@@ -31,7 +31,7 @@ export function PreOrder() {
               className="w-full aspect-square object-cover border border-white/10 group-hover:border-primary/50 transition-colors duration-300 shadow-[0_0_40px_rgba(139,0,0,0.25)]"
             />
             <span className="absolute top-3 left-3 bg-primary text-white text-[10px] md:text-xs uppercase tracking-[0.2em] px-2.5 py-1 shadow-[0_0_15px_rgba(139,0,0,0.6)]">
-              Pre-Order
+              Pre-Save
             </span>
           </motion.a>
 
@@ -54,7 +54,7 @@ export function PreOrder() {
               rel="noopener noreferrer"
               className="inline-block bg-primary hover:bg-primary/80 text-white uppercase tracking-[0.25em] text-xs md:text-sm px-10 py-4 transition-colors duration-300 shadow-[0_0_25px_rgba(139,0,0,0.4)]"
             >
-              Pre-Order Now
+              Pre-Save Now
             </a>
           </motion.div>
         </div>
