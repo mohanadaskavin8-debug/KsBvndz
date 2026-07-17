@@ -41,7 +41,7 @@ export function PreOrder() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-center md:text-left"
           >
-            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-3">New Single</h2>
+            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-3">New Album</h2>
             <h3 className="text-4xl md:text-6xl font-display uppercase tracking-wider text-white mb-4">
               Silence Feels Louder
             </h3>
