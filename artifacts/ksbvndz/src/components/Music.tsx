@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Play } from 'lucide-react';
 
+import silenceFeelsLouderImg from '@assets/covers/silence-feels-louder.jpg';
 import hatsImg from '@assets/covers/hats.jpg';
 import carDinkImg from '@assets/covers/car-dink-open-mic.jpg';
 import carDinkPt2Img from '@assets/covers/car-dink-pt2.jpg';
@@ -19,8 +20,25 @@ import villainsImg from '@assets/covers/villains.jpg';
 import darksideImg from '@assets/covers/darkside.jpg';
 import daysGoneImg from '@assets/covers/days-gone.jpg';
 
-const tracks = [
-  { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: true },
+type Track = {
+  title: string;
+  date: string;
+  image: string;
+  featured: boolean;
+  href?: string;
+  preOrder?: boolean;
+};
+
+const tracks: Track[] = [
+  {
+    title: 'Silence Feels Louder',
+    date: '2026-08-28',
+    image: silenceFeelsLouderImg,
+    featured: true,
+    href: 'https://streameum.bfan.link/silence-feels-louder',
+    preOrder: true
+  },
+  { title: 'Black Sheep', date: '2025-10-09', image: blackSheepImg, featured: false },
   { title: 'Fulla Pills', date: '2025-09-05', image: fullaPillsImg, featured: false },
   { title: 'Close to You', date: '2025-06-26', image: closeToYouImg, featured: false },
   { title: 'War', date: '2025-05-16', image: warImg, featured: false },
@@ -85,7 +103,7 @@ export function Music() {
           {tracks.map((track, idx) => (
             <motion.a
               key={idx}
-              href="https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe"
+              href={track.href ?? "https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe"}
               target="_blank"
               rel="noopener noreferrer"
               variants={itemVariants}
@@ -102,6 +120,13 @@ export function Music() {
                 
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+                {/* Pre-Order badge */}
+                {track.preOrder && (
+                  <span className="absolute top-3 left-3 md:top-4 md:left-4 z-10 bg-primary text-white text-[10px] md:text-xs uppercase tracking-[0.2em] px-2.5 py-1 shadow-[0_0_15px_rgba(139,0,0,0.6)]">
+                    Pre-Order
+                  </span>
+                )}
                 
                 {/* Play Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-50 group-hover:scale-100">
@@ -116,8 +141,8 @@ export function Music() {
                     {track.title}
                   </h4>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">
-                      {track.date}
+                    <span className={`text-[10px] md:text-xs uppercase tracking-widest ${track.preOrder ? 'text-primary font-semibold' : 'text-gray-400'}`}>
+                      {track.preOrder ? `Drops ${track.date}` : track.date}
                     </span>
                   </div>
                 </div>
