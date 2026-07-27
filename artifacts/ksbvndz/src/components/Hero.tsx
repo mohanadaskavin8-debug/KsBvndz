@@ -80,9 +80,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: reduce ? 0.1 : 2.7, duration: reduce ? 0.4 : 0.9 }}
           >
-            <span>Black Sheep</span>
+            <span>Pre-Save Album</span>
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Out Now</span>
+            <span>Below</span>
           </motion.div>
         </motion.div>
       </div>
