@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
@@ -11,6 +12,22 @@ export function Hero() {
   const opacityText = useTransform(scrollY, [0, 500], [1, 0]);
   const scaleText = useTransform(scrollY, [0, 500], [1, 1.2]);
   const letterSpacing = useTransform(scrollY, [0, 500], ['0.1em', '0.5em']);
+
+  const sharpRef = useRef<HTMLVideoElement>(null);
+  const blurRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const sharp = sharpRef.current;
+    const blur = blurRef.current;
+    if (!sharp || !blur) return;
+    const sync = () => {
+      if (Math.abs(sharp.currentTime - blur.currentTime) > 0.1) {
+        blur.currentTime = sharp.currentTime;
+      }
+    };
+    sharp.addEventListener('timeupdate', sync);
+    return () => sharp.removeEventListener('timeupdate', sync);
+  }, []);
 
   const socials = [
     { icon: SiSpotify, href: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe', label: 'Spotify' },
@@ -32,6 +49,7 @@ export function Hero() {
       >
         {/* Blurred fill — covers the full screen, hides the black bars */}
         <video
+          ref={blurRef}
           className="w-full h-full object-cover absolute inset-0 pointer-events-none"
           style={{ filter: 'blur(24px) brightness(0.35)', transform: 'scale(1.06)' }}
           src={heroVideo}
@@ -45,6 +63,7 @@ export function Hero() {
         />
         {/* Sharp centered video — full 1:1 square visible */}
         <video
+          ref={sharpRef}
           className="w-full h-full object-contain absolute inset-0 pointer-events-none"
           src={heroVideo}
           poster={heroPoster}
