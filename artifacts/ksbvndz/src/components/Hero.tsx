@@ -1,8 +1,8 @@
-import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
 import heroVideo from '@assets/hero-bg.mp4';
+import heroAmbient from '@assets/hero-ambient.mp4';
 import heroPoster from '@assets/hero-poster.jpg';
 
 export function Hero() {
@@ -12,22 +12,6 @@ export function Hero() {
   const opacityText = useTransform(scrollY, [0, 500], [1, 0]);
   const scaleText = useTransform(scrollY, [0, 500], [1, 1.2]);
   const letterSpacing = useTransform(scrollY, [0, 500], ['0.1em', '0.5em']);
-
-  const sharpRef = useRef<HTMLVideoElement>(null);
-  const blurRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const sharp = sharpRef.current;
-    const blur = blurRef.current;
-    if (!sharp || !blur) return;
-    const sync = () => {
-      if (Math.abs(sharp.currentTime - blur.currentTime) > 0.1) {
-        blur.currentTime = sharp.currentTime;
-      }
-    };
-    sharp.addEventListener('timeupdate', sync);
-    return () => sharp.removeEventListener('timeupdate', sync);
-  }, []);
 
   const socials = [
     { icon: SiSpotify, href: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe', label: 'Spotify' },
@@ -47,13 +31,12 @@ export function Hero() {
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Blurred fill — covers the full screen, hides the black bars */}
+        {/* AI-extended ambient fill — matching smoke texture covers the full screen */}
         <video
-          ref={blurRef}
           className="w-full h-full object-cover absolute inset-0 pointer-events-none"
-          style={{ filter: 'blur(24px) brightness(0.35)', transform: 'scale(1.06)' }}
-          src={heroVideo}
-          autoPlay
+          style={{ filter: 'brightness(0.7)' }}
+          src={heroAmbient}
+          autoPlay={!reduce}
           muted
           loop
           playsInline
@@ -61,20 +44,34 @@ export function Hero() {
           tabIndex={-1}
           aria-hidden="true"
         />
-        {/* Sharp centered video — full 1:1 square visible */}
-        <video
-          ref={sharpRef}
-          className="w-full h-full object-contain absolute inset-0 pointer-events-none"
-          src={heroVideo}
-          poster={heroPoster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          tabIndex={-1}
-          aria-hidden="true"
-        />
+        {/* Sharp centered video — full 1:1 square, edges melt into the ambient layer */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div
+            style={{
+              width: 'min(100vw, 100vh)',
+              height: 'min(100vw, 100vh)',
+              maskImage:
+                'linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 6%, black 94%, transparent)',
+              maskComposite: 'intersect',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 6%, black 94%, transparent)',
+              WebkitMaskComposite: 'source-in',
+            }}
+          >
+            <video
+              className="w-full h-full object-cover"
+              src={heroVideo}
+              poster={heroPoster}
+              autoPlay={!reduce}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          </div>
+        </div>
         <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
       </motion.div>
