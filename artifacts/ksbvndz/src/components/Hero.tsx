@@ -106,15 +106,15 @@ export function Hero() {
           {'PRE-SAVE'.split('').map((ch, i) => (
             <motion.span
               key={i}
-              className="text-white/50"
+              className="text-primary"
               animate={
                 reduce
                   ? {}
                   : {
-                      color: ['rgba(255,255,255,0.45)', 'rgba(255,255,255,1)', 'rgba(255,255,255,0.45)'],
+                      color: ['hsl(358 100% 35%)', 'hsl(358 100% 62%)', 'hsl(358 100% 35%)'],
                       textShadow: [
                         '0 0 0px rgba(255,40,50,0)',
-                        '0 0 16px rgba(255,60,70,0.95)',
+                        '0 0 18px rgba(255,60,70,0.95)',
                         '0 0 0px rgba(255,40,50,0)',
                       ],
                     }
