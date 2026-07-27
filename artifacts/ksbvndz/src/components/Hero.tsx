@@ -90,20 +90,73 @@ export function Hero() {
         ))}
       </div>
 
-      {/* ── Scroll indicator ─────────────────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
+      {/* ── Pre-Save Below indicator ─────────────────────────────────── */}
+      <motion.a
+        href="#preorder"
+        aria-label="Pre-save Silence Feels Louder — jump to the pre-save section"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2.5 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: reduce ? 0.2 : 3.6, duration: 1 }}
+        whileHover={reduce ? undefined : { scale: 1.06 }}
+        whileTap={reduce ? undefined : { scale: 0.96 }}
       >
-        <span className="text-xs uppercase tracking-widest text-gray-500">Scroll</span>
-        <motion.div
-          className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"
-          animate={reduce ? { height: '100%', opacity: 0.6 } : { height: ['0%', '100%'], opacity: [0, 1, 0] }}
-          transition={reduce ? { duration: 0 } : { duration: 1.5, repeat: Infinity, ease: 'linear' }}
-        />
-      </motion.div>
+        {/* PRE-SAVE — travelling red glow wave, letter by letter */}
+        <span className="flex items-center text-[11px] md:text-xs font-medium uppercase tracking-[0.45em] pl-[0.45em]">
+          {'PRE-SAVE'.split('').map((ch, i) => (
+            <motion.span
+              key={i}
+              className="text-white/50"
+              animate={
+                reduce
+                  ? {}
+                  : {
+                      color: ['rgba(255,255,255,0.45)', 'rgba(255,255,255,1)', 'rgba(255,255,255,0.45)'],
+                      textShadow: [
+                        '0 0 0px rgba(255,40,50,0)',
+                        '0 0 16px rgba(255,60,70,0.95)',
+                        '0 0 0px rgba(255,40,50,0)',
+                      ],
+                    }
+              }
+              transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 1.2, delay: i * 0.13, ease: 'easeInOut' }}
+            >
+              {ch}
+            </motion.span>
+          ))}
+        </span>
+
+        {/* Beam with a falling red comet */}
+        <span className="relative block w-[1px] h-10 overflow-hidden bg-white/10 rounded-full">
+          {reduce ? (
+            <span className="absolute inset-0 bg-gradient-to-b from-primary/70 to-transparent" />
+          ) : (
+            <motion.span
+              className="absolute left-0 top-0 w-full h-4 bg-gradient-to-b from-transparent via-red-500 to-primary"
+              style={{ boxShadow: '0 0 8px rgba(255,50,60,0.8)' }}
+              animate={{ y: [-16, 44] }}
+              transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 0.35, ease: 'easeIn' }}
+            />
+          )}
+        </span>
+
+        {/* Cascading chevrons */}
+        <span className="flex flex-col items-center -space-y-[5px] text-primary">
+          {[0, 1, 2].map((i) => (
+            <motion.svg
+              key={i}
+              width="13"
+              height="8"
+              viewBox="0 0 13 8"
+              fill="none"
+              animate={reduce ? { opacity: 0.35 + i * 0.2 } : { opacity: [0.08, 1, 0.08], y: [-1.5, 1.5, -1.5] }}
+              transition={reduce ? undefined : { duration: 1.4, repeat: Infinity, delay: i * 0.16, ease: 'easeInOut' }}
+            >
+              <path d="M1 1l5.5 5L12 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          ))}
+        </span>
+      </motion.a>
     </section>
   );
 }
