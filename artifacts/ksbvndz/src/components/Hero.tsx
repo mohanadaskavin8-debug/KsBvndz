@@ -30,8 +30,8 @@ export function Hero() {
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/80 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
         <video
           className="w-full h-full object-cover absolute inset-0 pointer-events-none"
           src={heroVideo}
