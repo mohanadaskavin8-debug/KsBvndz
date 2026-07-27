@@ -101,20 +101,19 @@ export function Hero() {
         whileHover={reduce ? undefined : { scale: 1.06 }}
         whileTap={reduce ? undefined : { scale: 0.96 }}
       >
-        {/* PRE-SAVE — travelling red glow wave, letter by letter */}
-        <span className="flex items-center text-[11px] md:text-xs font-medium uppercase tracking-[0.45em] pl-[0.45em]">
+        {/* PRE-SAVE — big Bebas Neue, red glow wave letter by letter */}
+        <span className="flex items-center font-display text-3xl md:text-4xl tracking-[0.2em] pl-[0.2em]">
           {'PRE-SAVE'.split('').map((ch, i) => (
             <motion.span
               key={i}
-              className="text-primary"
               animate={
                 reduce
-                  ? {}
+                  ? { color: 'hsl(358 100% 40%)' }
                   : {
-                      color: ['hsl(358 100% 35%)', 'hsl(358 100% 62%)', 'hsl(358 100% 35%)'],
+                      color: ['hsl(358 100% 32%)', 'hsl(358 100% 58%)', 'hsl(358 100% 32%)'],
                       textShadow: [
                         '0 0 0px rgba(255,40,50,0)',
-                        '0 0 18px rgba(255,60,70,0.95)',
+                        '0 0 22px rgba(255,60,70,0.9)',
                         '0 0 0px rgba(255,40,50,0)',
                       ],
                     }
