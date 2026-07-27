@@ -86,19 +86,6 @@ export function Hero() {
           className="flex flex-col items-center"
         >
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30, filter: 'blur(12px)' }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ delay: reduce ? 0 : 2.2, duration: reduce ? 0.4 : 1.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.h1
-              style={reduce ? undefined : { letterSpacing }}
-              className="text-6xl sm:text-7xl md:text-9xl lg:text-[12rem] font-display uppercase text-white font-bold mb-4 drop-shadow-2xl"
-            >
-              KsBvndz
-            </motion.h1>
-          </motion.div>
-
-          <motion.div
             className="flex items-center gap-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-300"
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
