@@ -175,3 +175,16 @@ html.lenis body {
 .box-glow {
   box-shadow: 0 0 40px rgba(204, 0, 0, 0.15);
 }
+
+/* Hero CTA animations */
+@keyframes hero-shimmer {
+  0%   { background-position: 200% center; }
+  60%  { background-position: -50% center; }
+  100% { background-position: -50% center; }
+}
+
+@keyframes hero-btn-shimmer {
+  0%   { background-position: 200% center; }
+  60%  { background-position: -50% center; }
+  100% { background-position: -50% center; }
+}
