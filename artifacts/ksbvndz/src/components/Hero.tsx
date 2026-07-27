@@ -102,7 +102,7 @@ export function Hero() {
         whileTap={reduce ? undefined : { scale: 0.96 }}
       >
         {/* PRE-SAVE — big Bebas Neue, red glow wave letter by letter */}
-        <span className="flex items-center font-display text-3xl md:text-4xl tracking-[0.2em] pl-[0.2em]">
+        <span className="flex items-center font-display text-sm md:text-base tracking-[0.45em] pl-[0.45em]">
           {'PRE-SAVE'.split('').map((ch, i) => (
             <motion.span
               key={i}
