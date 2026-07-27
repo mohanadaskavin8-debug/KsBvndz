@@ -33,7 +33,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
         <video
-          className="w-full h-full object-cover absolute inset-0 pointer-events-none"
+          className="w-full h-full object-contain absolute inset-0 pointer-events-none"
           src={heroVideo}
           poster={heroPoster}
           autoPlay
