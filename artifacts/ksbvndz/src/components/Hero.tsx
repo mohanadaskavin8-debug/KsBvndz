@@ -30,8 +30,20 @@ export function Hero() {
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
+        {/* Blurred fill — covers the full screen, hides the black bars */}
+        <video
+          className="w-full h-full object-cover absolute inset-0 pointer-events-none"
+          style={{ filter: 'blur(24px) brightness(0.35)', transform: 'scale(1.06)' }}
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
+        {/* Sharp centered video — full 1:1 square visible */}
         <video
           className="w-full h-full object-contain absolute inset-0 pointer-events-none"
           src={heroVideo}
@@ -44,12 +56,8 @@ export function Hero() {
           tabIndex={-1}
           aria-hidden="true"
         />
-        <img
-          src={heroPoster}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover absolute inset-0 pointer-events-none -z-10"
-        />
+        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
       </motion.div>
 
       {/* Particles/Dust effect overlay */}
