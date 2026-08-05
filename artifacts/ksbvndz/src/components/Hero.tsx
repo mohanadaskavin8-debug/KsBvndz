@@ -1,10 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
-import heroVideo from '@assets/hero-bg.mp4';
-import heroAmbient from '@assets/hero-ambient.mp4';
-import heroPoster from '@assets/hero-poster.jpg';
-
 export function Hero() {
   const reduce = useReducedMotion();
 
@@ -17,58 +13,131 @@ export function Hero() {
     { icon: SiX, href: 'https://x.com/28ville44', label: 'X' },
   ];
 
+  const line1 = 'BLUE GREEN'.split(' ');
+  const line2 = 'OUT NOW'.split(' ');
+
   return (
     <section id="video" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
 
-      {/* ── Video layer ─────────────────────────────────────────────── */}
+      {/* ── YouTube video background ─────────────────────────────────── */}
       <motion.div
         className="absolute inset-0 z-0 pointer-events-none"
         initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.06 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Ambient smoke fill */}
-        <video
-          className="w-full h-full object-cover absolute inset-0 pointer-events-none"
-          style={{ filter: 'brightness(0.7)' }}
-          src={heroAmbient}
-          autoPlay={!reduce}
-          muted loop playsInline preload="auto"
-          tabIndex={-1} aria-hidden="true"
-        />
-
-        {/* Sharp hero at true 960×960 resolution, edges melting into smoke */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div
+        {reduce ? (
+          /* Reduced motion: static black */
+          <div className="w-full h-full bg-black" />
+        ) : (
+          <iframe
+            src="https://www.youtube.com/embed/ayxVtt1TMdk?autoplay=1&mute=1&loop=1&playlist=ayxVtt1TMdk&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0"
+            className="absolute border-0"
             style={{
-              width:  'min(960px, 100vw, 100svh)',
-              height: 'min(960px, 100vw, 100svh)',
-              maskImage:
-                'linear-gradient(to right, transparent, black 7%, black 93%, transparent), linear-gradient(to bottom, transparent, black 7%, black 93%, transparent)',
-              maskComposite: 'intersect',
-              WebkitMaskImage:
-                'linear-gradient(to right, transparent, black 7%, black 93%, transparent), linear-gradient(to bottom, transparent, black 7%, black 93%, transparent)',
-              WebkitMaskComposite: 'source-in',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '100vw',
+              height: '56.25vw',
+              minHeight: '100vh',
+              minWidth: '177.78vh',
+              pointerEvents: 'none',
             }}
-          >
-            <video
-              className="w-full h-full object-cover"
-              src={heroVideo}
-              poster={heroPoster}
-              autoPlay={!reduce}
-              muted loop playsInline preload="auto"
-              tabIndex={-1} aria-hidden="true"
-            />
-          </div>
-        </div>
+            allow="autoplay; encrypted-media"
+            title="Blue Green music video"
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+        )}
 
         {/* Gradient vignette */}
-        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 z-10 pointer-events-none" />
       </motion.div>
 
       {/* ── Grain overlay ───────────────────────────────────────────── */}
-      <div className="absolute inset-0 z-10 opacity-30 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
+      <div className="absolute inset-0 z-10 opacity-20 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
+
+      {/* ── BLUE GREEN OUT NOW ───────────────────────────────────────── */}
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1">
+        {/* BLUE GREEN */}
+        <div className="flex gap-[0.35em]">
+          {line1.map((word, wi) => (
+            <div key={wi} className="flex overflow-hidden">
+              {word.split('').map((ch, ci) => (
+                <motion.span
+                  key={ci}
+                  className="font-display text-[14vw] md:text-[11vw] lg:text-[9vw] leading-none text-white"
+                  style={{ display: 'inline-block' }}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: '110%', skewY: 4 }}
+                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: '0%', skewY: 0 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: reduce ? 0.3 : 1.2 + wi * 0.18 + ci * 0.045,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Thin divider line */}
+        <motion.div
+          className="w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent my-1"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.9, delay: reduce ? 0.5 : 2.3, ease: [0.22, 1, 0.36, 1] }}
+        />
+
+        {/* OUT NOW */}
+        <div className="flex gap-[0.4em]">
+          {line2.map((word, wi) => (
+            <div key={wi} className="flex overflow-hidden">
+              {word.split('').map((ch, ci) => (
+                <motion.span
+                  key={ci}
+                  className="font-display text-[6.5vw] md:text-[5vw] lg:text-[4vw] leading-none"
+                  style={{
+                    display: 'inline-block',
+                    color: 'hsl(358 100% 50%)',
+                    textShadow: reduce ? 'none' : '0 0 30px rgba(255,40,50,0.7)',
+                  }}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: '110%' }}
+                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: '0%' }}
+                  transition={{
+                    duration: 0.65,
+                    delay: reduce ? 0.5 : 2.4 + wi * 0.2 + ci * 0.05,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Pulsing glow under OUT NOW */}
+        {!reduce && (
+          <motion.div
+            className="w-40 h-[2px] rounded-full mt-2"
+            style={{ background: 'hsl(358 100% 50%)' }}
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              scaleX: [0.6, 1, 0.6],
+              boxShadow: [
+                '0 0 8px rgba(255,40,50,0.4)',
+                '0 0 24px rgba(255,40,50,0.9)',
+                '0 0 8px rgba(255,40,50,0.4)',
+              ],
+            }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 3.2 }}
+          />
+        )}
+      </div>
 
       {/* ── Floating Socials ─────────────────────────────────────────── */}
       <div className="absolute bottom-12 right-12 z-30 hidden md:flex flex-col gap-6">
@@ -101,7 +170,6 @@ export function Hero() {
         whileHover={reduce ? undefined : { scale: 1.06 }}
         whileTap={reduce ? undefined : { scale: 0.96 }}
       >
-        {/* PRE-SAVE — big Bebas Neue, red glow wave letter by letter */}
         <span className="flex items-center font-display text-sm md:text-base tracking-[0.45em] pl-[0.45em]">
           {'PRE-SAVE'.split('').map((ch, i) => (
             <motion.span
@@ -125,7 +193,6 @@ export function Hero() {
           ))}
         </span>
 
-        {/* Beam with a falling red comet */}
         <span className="relative block w-[1px] h-10 overflow-hidden bg-white/10 rounded-full">
           {reduce ? (
             <span className="absolute inset-0 bg-gradient-to-b from-primary/70 to-transparent" />
@@ -139,7 +206,6 @@ export function Hero() {
           )}
         </span>
 
-        {/* Cascading chevrons */}
         <span className="flex flex-col items-center -space-y-[5px] text-primary">
           {[0, 1, 2].map((i) => (
             <motion.svg
