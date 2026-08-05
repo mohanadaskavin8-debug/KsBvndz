@@ -11,7 +11,10 @@ export function Hero() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v || reduce) return;
+    // React doesn't render the muted *attribute*; Safari checks it for autoplay
     v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('muted', '');
     const attempt = () => v.play().catch(() => {});
     attempt();
     // retry on first user interaction if autoplay was blocked
