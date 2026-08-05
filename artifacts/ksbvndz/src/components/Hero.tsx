@@ -1,6 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
+const BLUE_GREEN_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
+
 export function Hero() {
   const reduce = useReducedMotion();
 
@@ -19,36 +21,24 @@ export function Hero() {
   return (
     <section id="video" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
 
-      {/* ── YouTube video background ─────────────────────────────────── */}
+      {/* ── Self-hosted video background ─────────────────────────────── */}
       <motion.div
         className="absolute inset-0 z-0 pointer-events-none"
         initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.06 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        {reduce ? (
-          /* Reduced motion: static black */
-          <div className="w-full h-full bg-black" />
-        ) : (
-          <iframe
-            src="https://www.youtube.com/embed/ayxVtt1TMdk?autoplay=1&mute=1&loop=1&playlist=ayxVtt1TMdk&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0"
-            className="absolute border-0"
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100vw',
-              height: '56.25vw',
-              minHeight: '100vh',
-              minWidth: '177.78vh',
-              pointerEvents: 'none',
-            }}
-            allow="autoplay; encrypted-media"
-            title="Blue Green music video"
-            tabIndex={-1}
-            aria-hidden="true"
-          />
-        )}
+        <video
+          className="absolute border-0 object-cover w-full h-full"
+          src="/blue-green.mp4"
+          autoPlay={!reduce}
+          muted
+          loop
+          playsInline
+          preload="auto"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
 
         {/* Gradient vignette */}
         <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
@@ -120,7 +110,7 @@ export function Hero() {
           ))}
         </div>
 
-        {/* Pulsing glow under OUT NOW */}
+        {/* Pulsing glow bar */}
         {!reduce && (
           <motion.div
             className="w-40 h-[2px] rounded-full mt-2"
@@ -138,6 +128,23 @@ export function Hero() {
           />
         )}
       </div>
+
+      {/* ── Watch on YouTube button ──────────────────────────────────── */}
+      <motion.a
+        href={BLUE_GREEN_YT}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Watch Blue Green on YouTube"
+        className="absolute top-6 left-6 z-30 flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm text-white/80 hover:text-white hover:border-white/40 hover:bg-black/60 transition-all duration-300 group"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: reduce ? 0.3 : 3.2, duration: 0.6 }}
+        whileHover={reduce ? undefined : { scale: 1.04 }}
+        whileTap={reduce ? undefined : { scale: 0.97 }}
+      >
+        <SiYoutube size={16} className="text-red-500 group-hover:text-red-400 transition-colors flex-shrink-0" />
+        <span className="font-display text-xs tracking-[0.12em]">WATCH ON YOUTUBE</span>
+      </motion.a>
 
       {/* ── Floating Socials ─────────────────────────────────────────── */}
       <div className="absolute bottom-12 right-12 z-30 hidden md:flex flex-col gap-6">
