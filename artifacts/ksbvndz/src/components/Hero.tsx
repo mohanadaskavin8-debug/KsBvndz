@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
@@ -5,6 +6,19 @@ const BLUE_GREEN_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || reduce) return;
+    v.muted = true;
+    const attempt = () => v.play().catch(() => {});
+    attempt();
+    // retry on first user interaction if autoplay was blocked
+    const onInteract = () => { attempt(); window.removeEventListener('pointerdown', onInteract); };
+    window.addEventListener('pointerdown', onInteract, { once: true });
+    return () => window.removeEventListener('pointerdown', onInteract);
+  }, [reduce]);
 
   const socials = [
     { icon: SiSpotify,    href: 'https://open.spotify.com/artist/2DhpGOseQQqPEbYr9mBiwe', label: 'Spotify' },
@@ -29,8 +43,10 @@ export function Hero() {
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
         <video
+          ref={videoRef}
           className="absolute w-full h-full object-cover border-0"
           src="/blue-green.mp4"
+          poster="/blue-green-poster.jpg"
           autoPlay={!reduce}
           muted
           loop
