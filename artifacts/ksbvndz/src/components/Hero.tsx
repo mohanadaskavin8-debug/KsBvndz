@@ -32,7 +32,7 @@ export function Hero() {
     { icon: SiX,          href: 'https://x.com/28ville44',                                  label: 'X' },
   ];
 
-  const line1 = 'BLUE GREEN'.split(' ');
+  const line1 = 'BLUES & GREENS'.split(' ');
   const line2 = 'OUT NOW'.split(' ');
 
   return (
@@ -65,7 +65,7 @@ export function Hero() {
       {/* ── Grain overlay ───────────────────────────────────────────── */}
       <div className="absolute inset-0 z-10 opacity-20 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
 
-      {/* ── BLUE GREEN OUT NOW ───────────────────────────────────────── */}
+      {/* ── BLUES & GREENS OUT NOW ────────────────────────────────────── */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1">
         <div className="flex gap-[0.35em]">
           {line1.map((word, wi) => (
@@ -158,7 +158,7 @@ export function Hero() {
           href={BLUE_GREEN_YT}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Watch Blue Green on YouTube"
+          aria-label="Watch Blues & Greens on YouTube"
           className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-white/40 hover:bg-black/60 transition-all duration-300 group"
           whileHover={reduce ? undefined : { scale: 1.05 }}
           whileTap={reduce ? undefined : { scale: 0.96 }}
