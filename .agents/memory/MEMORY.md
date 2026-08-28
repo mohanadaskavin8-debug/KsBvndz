@@ -1,3 +1,3 @@
 - [Lenis smooth scroll](lenis-smooth-scroll.md) — native `lenis` only (deprecated `@studio-freight/react-lenis` = duplicate-React crash); Lenis also overrides native hash-anchor links, so intercept anchor clicks and call `lenis.scrollTo()`.
-- [KsBvndz discography data source](ksbvndz-discography.md) — song list uses REAL Apple Music metadata (iTunes lookup id 1745377739) for titles/dates/covers; never fabricate.
+- [KsBvndz discography data source](ksbvndz-discography.md) — use real Apple metadata: artist 1745377739 and Silence Feels Louder album 6781061654; never fabricate.
 - [KsBvndz hero background video](ksbvndz-hero-video.md) — self-hosted native <video>, never a YouTube iframe; 1:1 clip is widescreen-extended by an AI smoke loop + edge mask, not outpainting.

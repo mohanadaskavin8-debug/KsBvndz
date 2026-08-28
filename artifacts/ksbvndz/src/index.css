@@ -118,6 +118,13 @@
   
   html {
     scroll-behavior: auto;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    max-width: 100%;
+    overflow-x: clip;
   }
 }
 
