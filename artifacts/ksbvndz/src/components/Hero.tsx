@@ -117,7 +117,7 @@ export function Hero() {
         ))}
       </div>
 
-      {/* ── Bottom-centre stack: YT pill + Pre-Save indicator ───────── */}
+      {/* ── Bottom-centre stack: save pill + tracklist indicator ──────── */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3"
         initial={{ opacity: 0 }}
@@ -137,16 +137,16 @@ export function Hero() {
           <span className="font-display text-[10px] tracking-[0.15em]">SAVE ALBUM</span>
         </motion.a>
 
-        {/* Pre-save indicator */}
+        {/* Tracklist indicator */}
         <motion.a
           href="#preorder"
-          aria-label="Pre-save Silence Feels Louder"
+          aria-label="Preview tracklist"
           className="flex flex-col items-center gap-2.5 cursor-pointer"
           whileHover={reduce ? undefined : { scale: 1.06 }}
           whileTap={reduce ? undefined : { scale: 0.96 }}
         >
           <span className="flex items-center font-display text-sm md:text-base tracking-[0.45em] pl-[0.45em]">
-            {'PRE-SAVE'.split('').map((ch, i) => (
+            {'PREVIEW TRACKLIST'.split('').map((ch, i) => (
               <motion.span
                 key={i}
                 animate={
