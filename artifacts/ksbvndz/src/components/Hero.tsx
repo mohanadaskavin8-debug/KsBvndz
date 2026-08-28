@@ -149,6 +149,7 @@ export function Hero() {
             {'PREVIEW TRACKLIST'.split('').map((ch, i) => (
               <motion.span
                 key={i}
+                style={{ display: 'inline-block', width: ch === ' ' ? '0.45em' : undefined }}
                 animate={
                   reduce
                     ? { color: 'hsl(358 100% 40%)' }
