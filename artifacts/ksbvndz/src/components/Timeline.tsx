@@ -36,6 +36,13 @@ const milestones = [
     subtitle: 'Official Music Video',
     description: 'The latest visual — dark, melodic drill and a statement of where he stands now.',
     stats: 'Official Video'
+  },
+  {
+    date: 'August 2026',
+    title: 'Silence Feels Louder',
+    subtitle: 'Album Dropped',
+    description: 'The 20-track album — a louder, darker chapter in the KsBvndz story.',
+    stats: '20 Tracks'
   }
 ];
 
