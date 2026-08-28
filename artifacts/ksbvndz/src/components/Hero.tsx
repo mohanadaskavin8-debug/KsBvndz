@@ -1,21 +1,31 @@
 import { useEffect, useRef } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
-const BLUE_GREEN_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
+import heroVideo from '@assets/hero-bg.mp4';
+import heroAmbient from '@assets/hero-ambient.mp4';
+import heroPoster from '@assets/hero-poster.jpg';
+
+const BLUES_GREENS_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
 
 export function Hero() {
+  const { scrollY } = useScroll();
   const reduce = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const opacityText = useTransform(scrollY, [0, 500], [1, 0]);
+  const scaleText = useTransform(scrollY, [0, 500], [1, 1.2]);
+  const ambientVideoRef = useRef<HTMLVideoElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v || reduce) return;
-    // React doesn't render the muted *attribute*; Safari checks it for autoplay
-    v.muted = true;
-    v.defaultMuted = true;
-    v.setAttribute('muted', '');
-    const attempt = () => v.play().catch(() => {});
+    const videos = [ambientVideoRef.current, heroVideoRef.current].filter(Boolean) as HTMLVideoElement[];
+    if (reduce || videos.length === 0) return;
+    // React doesn't render the muted *attribute*; Safari checks it for autoplay.
+    videos.forEach((video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.setAttribute('muted', '');
+    });
+    const attempt = () => videos.forEach((video) => video.play().catch(() => {}));
     attempt();
     // retry on first user interaction if autoplay was blocked
     const onInteract = () => { attempt(); window.removeEventListener('pointerdown', onInteract); };
@@ -38,18 +48,18 @@ export function Hero() {
   return (
     <section id="video" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
 
-      {/* ── Self-hosted video background ─────────────────────────────── */}
+      {/* ── Animated smoke background with feathered centered artwork ── */}
       <motion.div
         className="absolute inset-0 z-0 pointer-events-none"
-        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.06 }}
+        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
         animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ duration: reduce ? 0.6 : 3.4, ease: [0.22, 1, 0.36, 1] }}
       >
         <video
-          ref={videoRef}
-          className="absolute w-full h-full object-cover border-0"
-          src="/blue-green.mp4"
-          poster="/blue-green-poster.jpg"
+          ref={ambientVideoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'brightness(0.7)' }}
+          src={heroAmbient}
           autoPlay={!reduce}
           muted
           loop
@@ -58,15 +68,46 @@ export function Hero() {
           tabIndex={-1}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div
+            style={{
+              width: 'min(100vw, 100vh)',
+              height: 'min(100vw, 100vh)',
+              maskImage:
+                'linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 6%, black 94%, transparent)',
+              maskComposite: 'intersect',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 6%, black 94%, transparent)',
+              WebkitMaskComposite: 'source-in',
+            }}
+          >
+            <video
+              ref={heroVideoRef}
+              className="w-full h-full object-cover"
+              src={heroVideo}
+              poster={heroPoster}
+              autoPlay={!reduce}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none" />
       </motion.div>
 
-      {/* ── Grain overlay ───────────────────────────────────────────── */}
-      <div className="absolute inset-0 z-10 opacity-20 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
+      {/* ── Dust/grain overlay ───────────────────────────────────────── */}
+      <div className="absolute inset-0 z-10 opacity-30 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
 
       {/* ── BLUES & GREENS OUT NOW ────────────────────────────────────── */}
-      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1">
+      <motion.div
+        className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1"
+        style={reduce ? undefined : { opacity: opacityText, scale: scaleText }}
+      >
         <div className="flex gap-[0.35em]">
           {line1.map((word, wi) => (
             <div key={wi} className="flex overflow-hidden">
@@ -124,7 +165,7 @@ export function Hero() {
             transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 3.2 }}
           />
         )}
-      </div>
+      </motion.div>
 
       {/* ── Floating Socials ─────────────────────────────────────────── */}
       <div className="absolute bottom-12 right-12 z-30 hidden md:flex flex-col gap-6">
@@ -155,7 +196,7 @@ export function Hero() {
       >
         {/* Watch on YouTube pill */}
         <motion.a
-          href={BLUE_GREEN_YT}
+          href={BLUES_GREENS_YT}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Watch Blues & Greens on YouTube"
