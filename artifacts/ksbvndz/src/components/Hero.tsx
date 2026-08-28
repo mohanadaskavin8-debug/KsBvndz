@@ -6,7 +6,7 @@ import heroVideo from '@assets/hero-bg.mp4';
 import heroAmbient from '@assets/hero-ambient.mp4';
 import heroPoster from '@assets/hero-poster.jpg';
 
-const BLUES_GREENS_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
+const RELEASE_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -42,7 +42,7 @@ export function Hero() {
     { icon: SiX,          href: 'https://x.com/28ville44',                                  label: 'X' },
   ];
 
-  const line1 = 'BLUES & GREENS'.split(' ');
+  const line1 = 'SILENCE FEELS LOUDER'.split(' ');
   const line2 = 'OUT NOW'.split(' ');
 
   return (
@@ -103,7 +103,7 @@ export function Hero() {
       {/* ── Dust/grain overlay ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-10 opacity-30 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
 
-      {/* ── BLUES & GREENS OUT NOW ────────────────────────────────────── */}
+      {/* ── SILENCE FEELS LOUDER OUT NOW ──────────────────────────────── */}
       <motion.div
         className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1"
         style={reduce ? undefined : { opacity: opacityText, scale: scaleText }}
@@ -196,10 +196,10 @@ export function Hero() {
       >
         {/* Watch on YouTube pill */}
         <motion.a
-          href={BLUES_GREENS_YT}
+          href={RELEASE_YT}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Watch Blues & Greens on YouTube"
+          aria-label="Watch Silence Feels Louder on YouTube"
           className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-white/40 hover:bg-black/60 transition-all duration-300 group"
           whileHover={reduce ? undefined : { scale: 1.05 }}
           whileTap={reduce ? undefined : { scale: 0.96 }}
