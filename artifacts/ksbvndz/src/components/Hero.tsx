@@ -6,7 +6,7 @@ import heroVideo from '@assets/hero-bg.mp4';
 import heroAmbient from '@assets/hero-ambient.mp4';
 import heroPoster from '@assets/hero-poster.jpg';
 
-const RELEASE_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
+const SAVE_ALBUM_URL = 'https://streameum.bfan.link/silence-feels-louder';
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -124,18 +124,17 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: reduce ? 0.2 : 3.6, duration: 1 }}
       >
-        {/* Watch on YouTube pill */}
+        {/* Save album pill */}
         <motion.a
-          href={RELEASE_YT}
+          href={SAVE_ALBUM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Watch Silence Feels Louder on YouTube"
+          aria-label="Save album Silence Feels Louder"
           className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-white/40 hover:bg-black/60 transition-all duration-300 group"
           whileHover={reduce ? undefined : { scale: 1.05 }}
           whileTap={reduce ? undefined : { scale: 0.96 }}
         >
-          <SiYoutube size={13} className="text-red-500 group-hover:text-red-400 transition-colors flex-shrink-0" />
-          <span className="font-display text-[10px] tracking-[0.15em]">WATCH ON YOUTUBE</span>
+          <span className="font-display text-[10px] tracking-[0.15em]">SAVE ALBUM</span>
         </motion.a>
 
         {/* Pre-save indicator */}
