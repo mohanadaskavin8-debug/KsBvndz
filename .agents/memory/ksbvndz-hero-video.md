@@ -14,7 +14,6 @@ The Hero (`artifacts/ksbvndz` → `src/components/Hero.tsx`) background is a **s
 The hero uses the original smoke treatment: a muted ambient smoke loop fills the viewport while the sharper user-uploaded square hero clip plays centered above it with feathered edges. Both are self-hosted native videos and use the original poster frame for loading.
 
 ## Current presentation
-- The visible release title is exactly **SILENCE FEELS LOUDER**.
-- The title fades/scales in response to scroll; keep the smoke and centered-video layers independent.
+- There is no release-title overlay over the smoke animation; keep the smoke and centered-video layers independent.
 - The YouTube button is only an external link; it must not become the video source.
 - Videos autoplay only when `useReducedMotion()` is false (`autoPlay={!reduce}`).

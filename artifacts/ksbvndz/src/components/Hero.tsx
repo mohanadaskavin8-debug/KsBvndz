@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SiSpotify, SiApplemusic, SiInstagram, SiYoutube, SiTiktok, SiX } from 'react-icons/si';
 
 import heroVideo from '@assets/hero-bg.mp4';
@@ -9,10 +9,7 @@ import heroPoster from '@assets/hero-poster.jpg';
 const RELEASE_YT = 'https://www.youtube.com/watch?v=ayxVtt1TMdk';
 
 export function Hero() {
-  const { scrollY } = useScroll();
   const reduce = useReducedMotion();
-  const opacityText = useTransform(scrollY, [0, 500], [1, 0]);
-  const scaleText = useTransform(scrollY, [0, 500], [1, 1.2]);
   const ambientVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -41,9 +38,6 @@ export function Hero() {
     { icon: SiTiktok,     href: 'https://tiktok.com/@ksbvndz',                              label: 'TikTok' },
     { icon: SiX,          href: 'https://x.com/28ville44',                                  label: 'X' },
   ];
-
-  const line1 = 'SILENCE FEELS LOUDER'.split(' ');
-  const line2 = 'OUT NOW'.split(' ');
 
   return (
     <section id="video" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
@@ -102,70 +96,6 @@ export function Hero() {
 
       {/* ── Dust/grain overlay ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-10 opacity-30 mix-blend-screen pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+')] bg-repeat" />
-
-      {/* ── SILENCE FEELS LOUDER OUT NOW ──────────────────────────────── */}
-      <motion.div
-        className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none gap-1"
-        style={reduce ? undefined : { opacity: opacityText, scale: scaleText }}
-      >
-        <div className="flex gap-[0.35em]">
-          {line1.map((word, wi) => (
-            <div key={wi} className="flex overflow-hidden">
-              {word.split('').map((ch, ci) => (
-                <motion.span
-                  key={ci}
-                  className="font-display text-[14vw] md:text-[11vw] lg:text-[9vw] leading-none text-white"
-                  style={{ display: 'inline-block' }}
-                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: '110%', skewY: 4 }}
-                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: '0%', skewY: 0 }}
-                  transition={{ duration: 0.7, delay: reduce ? 0.3 : 1.2 + wi * 0.18 + ci * 0.045, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {ch}
-                </motion.span>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <motion.div
-          className="w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent my-1"
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: reduce ? 0.5 : 2.3, ease: [0.22, 1, 0.36, 1] }}
-        />
-
-        <div className="flex gap-[0.4em]">
-          {line2.map((word, wi) => (
-            <div key={wi} className="flex overflow-hidden">
-              {word.split('').map((ch, ci) => (
-                <motion.span
-                  key={ci}
-                  className="font-display text-[6.5vw] md:text-[5vw] lg:text-[4vw] leading-none"
-                  style={{ display: 'inline-block', color: 'hsl(358 100% 50%)', textShadow: reduce ? 'none' : '0 0 30px rgba(255,40,50,0.7)' }}
-                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: '110%' }}
-                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: '0%' }}
-                  transition={{ duration: 0.65, delay: reduce ? 0.5 : 2.4 + wi * 0.2 + ci * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {ch}
-                </motion.span>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {!reduce && (
-          <motion.div
-            className="w-40 h-[2px] rounded-full mt-2"
-            style={{ background: 'hsl(358 100% 50%)' }}
-            animate={{
-              opacity: [0.3, 1, 0.3],
-              scaleX: [0.6, 1, 0.6],
-              boxShadow: ['0 0 8px rgba(255,40,50,0.4)', '0 0 24px rgba(255,40,50,0.9)', '0 0 8px rgba(255,40,50,0.4)'],
-            }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 3.2 }}
-          />
-        )}
-      </motion.div>
 
       {/* ── Floating Socials ─────────────────────────────────────────── */}
       <div className="absolute bottom-12 right-12 z-30 hidden md:flex flex-col gap-6">
