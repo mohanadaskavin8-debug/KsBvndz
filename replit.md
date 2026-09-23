@@ -1,45 +1,52 @@
-# [Project name]
+# KsBvndz — Artist Website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A custom, responsive artist website designed and developed for **KsBvndz**, a Toronto-based artist.
 
-## Run & Operate
+The platform serves as a centralized digital home for his music, releases, visual content, artist identity, and social platforms.
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+## ✨ Features
 
-## Stack
+* 🎵 Interactive album and tracklist experience
+* 💿 Music release and discography showcase
+* 📖 Artist story and timeline
+* 🖼️ Visual gallery for artist content
+* 🔗 Direct links to streaming and social platforms
+* 📱 Fully responsive design across desktop and mobile
+* 🎨 Custom visual identity built around the artist's brand
+* ⚡ Smooth, modern browsing experience
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+## 🎯 Project Goals
 
-## Where things live
+The goal was to create more than a standard artist landing page — the website was designed as a **centralized digital platform** for KsBvndz's music and brand.
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+The experience allows visitors to:
 
-## Architecture decisions
+* Explore current and previous releases
+* Preview album tracks
+* Discover the artist's journey and discography
+* Browse visual content
+* Find streaming platforms and social media
+* Access booking and contact information
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+## 🛠️ Tech Stack
 
-## Product
+* **Language:** TypeScript
+* **Package Manager:** pnpm
+* **Build System:** TypeScript / pnpm workspace
+* **Platform:** Replit
+* **Code Formatting:** Prettier
+* **Integrations:** Replit Connectors SDK
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+## 🌐 Live Website
 
-## User preferences
+**https://ksbvndz.com**
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+## 👨‍💻 Development
 
-## Gotchas
+I designed and developed **ksbvndz.com** from concept through deployment, handling the site's UI/UX, responsive layouts, music presentation, content organization, and overall digital experience.
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+The project involved translating an artist's identity into a **real-world, client-facing digital product** designed to showcase music while providing fans with an engaging way to explore the artist's work.
 
-## Pointers
+---
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+**Built by Mohanadas Kavin**
